@@ -68,13 +68,13 @@
                         Fizz Buzz: A Coding Challenge
                     </h1>
                     <p class="lead">
-                        Fizz Buzz is a classic coding challenge that uses conditional statements to iterate over an array of numbers to display the "Fizz Buzz" if the value is divisible by both 3 and 5, "Fizz" if it is divisible by only 3, "Buzz" if it is divisble by only 5, and the value itself if not divisble by either.
+                        Fizz Buzz is a classic coding challenge that uses conditional statements to iterate over an array of numbers to display the "Fizz Buzz" if the value is divisible by both 3 and 5, "Fizz" if it is divisible by only 3, "Buzz" if it is divisble by only 5, and the value itself if not divisble by either. With a slight twist to the original coding challenge, we will let you choose which value is the "Fizz", "Buzz", and "Fizz Buzz" numbers from 1 to 100!
                     </p>
                     <h2 class="mt-5 border-bottom border-2">
                         Instructions
                     </h2>
                     <p class="text-muted">
-                        Enter a starting value and an ending value. Press the button and let the Fizz Buzz application do the work for you!
+                        Enter any value between 1 and 100 as your "Fizz Value". Next enter your "Buzz Value" also between 1 and 100. Then press the submit button and let the application do the work for you! It will display "Fizz Buzz" at any number that is a multiple of your "Fizz" and "Buzz" values, it will display "Fizz" at your Fizz value, and it will display "Buzz" at your Buzz value. If the number isn't a multiple of either, the application will simply return the number itself! Give it a try!
                     </p>
                 </div>
                 <div class="col col-lg-8">
@@ -83,10 +83,10 @@
                     </h3>
                     <form class="row gy-2 gx-3">
                         <div class="col">
-                            <input id="startValue" type="number" class="form-control" placeholder="Start Value" value="0" aria-label="Start value">
+                            <input id="fizzValue" type="number" class="form-control" placeholder="Fizz Value" value="" aria-label="Fizz value">
                         </div>
                         <div class="col">
-                            <input id="endValue" type="number" class="form-control" placeholder="End Value" value="100" aria-label="End Value">
+                            <input id="buzzValue" type="number" class="form-control" placeholder="Buzz Value" value="" aria-label="Buzz Value">
                         </div>
                         <div class="col-12 d-flex justify-content-end">
                             <button id="btnSubmit" type="button" class="btn btn-dark btn-lg">Submit</button>
@@ -97,6 +97,7 @@
                         <table class="table table-striped table-sm">
                             <tbody id="results">
                                 <!-- RESULTS GO HERE -->
+
                             </tbody>
                         </table>
                     </div>
@@ -124,6 +125,17 @@
             </div>
         </div>
     </footer>
+
+    <template id="fbTemplate">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">

@@ -17,6 +17,8 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <!-- Font Awesome imported-->
     <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="/css/prism.css">
     <!--My personal CSS-->
     <link rel="stylesheet" href="/css/site.css">
 </head>
@@ -62,17 +64,121 @@
     <!-- ==== Main Section ==== -->
     <main class="flex-shrink-0">
         <div class="container py-5 px-5">
-            <h2 class="border-1 border-bottom border-dark mt-5">The Code for APP NAME</h2>
+            <h2 class="border-1 border-bottom border-dark mt-5">The Code for Fizz Buzz</h2>
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        <!-- Code Goes Here -->
+                        // The Controller Function
+                        //Get the values from the user. This function is called on the app.html file to intiate the application on the submit button click. 
+                        function getValues() {
+                            // Get the values from the user input
+                            let fizzValue = document.getElementById("fizzValue").value;
+                            let buzzValue = document.getElementById("buzzValue").value;
+
+                            // parse user inputs to change them to type integer
+                            fizzValue = parseInt(fizzValue);
+                            buzzValue = parseInt(buzzValue);
+
+                            // validate that the values are integers. If so, proceed normally. If not, request integers from the user in an alert.
+                            if (Number.isInteger(fizzValue) && Number.isInteger(buzzValue)) {
+                                // since the return value of fizzBuzz will be passed to displayValues,save the return value in a variable
+                                let fbArray = fizzBuzz(fizzValue, buzzValue);
+                                // Pass in the returned value from fizzBuzz into displayValues. This will complete the application.
+                                displayData(fbArray);
+                            } else {
+                                alert("Please enter only integer numbers.")
+                            }
+
+                        }
+
+
+                        // The Logic Function
+                        // Pass in the User's values into our function. Create a return array. Iterate through the user's array with the conditions to display the number value, "Fizz", "Buzz", or "Fizz Buzz" depending on the conditionals.
+                        function fizzBuzz(fizzValue, buzzValue) {
+                            // Declare the variable to be returned. This will be mutated throughout the execution.
+                            let returnArray = [];
+                            // Iterate over each value between the startValue and endValue with conditional statements that will push the proper value into the returnArray.
+                            for (let i = 1; i <= 100; i++){
+                                if (i % fizzValue === 0 && i % buzzValue === 0) {
+                                    returnArray.push("FizzBuzz");
+                                } else if (i % fizzValue === 0) {
+                                    returnArray.push("Fizz");
+                                } else if(i % buzzValue === 0) {
+                                    returnArray.push("Buzz");
+                                } else {
+                                    returnArray.push(i);
+                                }
+                            }
+                            return returnArray;
+                        }
+
+
+                        // The View Function
+                        // Pass in an array that will be displayed to the user in the results table.
+                        function displayData(fbArray) {
+                            // get the table body element from page
+                            let tableBody = document.getElementById("results");
+
+                            // get the template row
+                            let templateRow = document.getElementById("fbTemplate");
+
+                            // clear the table first
+                            tableBody.innerHTML = "";
+
+                            for (let i = 0; i < fbArray.length; i += 5) {
+                                
+                                let tableRow = document.importNode(templateRow.content, true);
+
+                                // create an array of all "td" values from the tableRow variable, which is templateRow within the HTML
+                                let rowCols = tableRow.querySelectorAll("td");
+
+                                rowCols[0].classList.add(fbArray[i]);
+                                rowCols[0].textContent = fbArray[i];
+                                
+                                rowCols[1].classList.add(fbArray[i+1]);
+                                rowCols[1].textContent = fbArray[i+1];
+                                
+                                rowCols[2].classList.add(fbArray[i+2]);
+                                rowCols[2].textContent = fbArray[i+2];
+                                
+                                rowCols[3].classList.add(fbArray[i+3]);
+                                rowCols[3].textContent = fbArray[i+3];
+                                
+                                rowCols[4].classList.add(fbArray[i+4]);
+                                rowCols[4].textContent = fbArray[i+4];
+
+                                tableBody.appendChild(tableRow);
+                            }
+                        }
                     </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
                     <h5>Introduction</h5>
-                    <p>This will lay out The Controller Function, The Logic Function(s), and The View Function(s) for the application.</p>
+                    <p>
+                        The Fizz Buzz application practices encapsulation and separation of concerns to limit side effects and create more ease of reading and refactoring of the code. There is a Controller Function, getValues, a Logic Function, fizzBuzz, and a View Function, displayData. The Controller will control the thread of execution by declaring necessary global variables and calling the other functions. The Logic will provide the algorithm to solve the Fizz Buzz challenge, and The View will display the end result to the user.
+                    </p>
+                    <p>
+                        Two other pertinent declarations are "hidden" within the HTML. There is a template that we will grab with The View Function to manipulate the Document Object Model and there is a small script that calls our Controller Function when the user clicks "submit."
+                    </p>
+
+                    <h5>The Controller</h5>
+                    <p>
+                        The Controller's job in this application is to get and validate the user's input and control the thread of execution of the application. It defines, parses, and validates that the values input by the user are integers. If they aren't, it displays a request for integers only. If they are, it continues to call the fizzBuzz function and the displayData function respectively, passing in the necessary parameters to complete the execution.
+                    </p>
+
+                    <h5>The Logic</h5>
+                    <p>
+                        The Logic Function, fizzBuzz, is where the "magic" of the application takes place. It will take in the user's input of what multiples they wish to test, and run the values of 1-100 against those values. If the number between 1-100 is a multiple of both user-inputs, then it will push "FizzBuzz" into the returnArrray. It will push "Fizz" or "Buzz" if it is a multiple of one or the other, respective to which value it is a multiple of. If it is not a multiple of either, the number itself is pushed into  the returnArray.
+                    </p>
+
+                    <h5>The View</h5>
+                    <p>
+                        The View Function, displayData, is responsible for displaying the result from the algorithm to the user. It first finds the element in the HTML where it will display the date, then grabs the template that it will build the display from. In this case, it was a row with five columns. Then it clears the template to ensure each template starts with an empty string. Finally, it iterates through the array from The Logic Function to build each template row based on the value at each index. Since five values are displayed per row, we incremented our "for-loop" by five each iteration. 
+                    </p>
+                    <p>
+                        We also used the value at each index to build out a class list that enabled us to manipulate the display of the text by using CSS. We defined ".Fizz", ".Buzz", and ".FizzBuzz" as classes in our CSS to  change the text color and font weight respective to each. There was no numeric declarations of classes, so those values that were numbers were simply ignored by CSS and displayed as normal text.
+                    </p>
                 </div>
             </div>
         </div>
